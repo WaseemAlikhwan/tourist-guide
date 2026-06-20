@@ -130,3 +130,13 @@ php artisan test
 ## License
 
 This project is open-sourced under the [MIT License](LICENSE).
+
+
+
+<img width="300" alt="Screenshot (8)" src="https://github.com/user-attachments/assets/6ca32ea2-6e9d-46d6-b005-47224c744e26" />
+
+
+
+
+
+
