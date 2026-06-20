@@ -1,0 +1,781 @@
+﻿<mxfile host="app.diagrams.net" agent="tourist-guide" compressed="false" pages="10">
+  <diagram id="pArch" name="٠ - نظرة عامة والبنية" default="true">
+    <mxGraphModel dx="1154" dy="549" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="arch1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;طبقة العرض (Presentation)&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;Blade Views: website / admin / provider&lt;br/&gt;واجهات عربية/إنجليزية + تفاعل المستخدم&lt;/p&gt;" vertex="1">
+          <mxGeometry height="70" width="1040" x="80" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="arch2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;طبقة HTTP&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;Controllers: Admin, User, Provider, Public&lt;br/&gt;Middleware: auth, isAdmin, approvedContentProvider, SetLocale&lt;/p&gt;" vertex="1">
+          <mxGeometry height="90" width="1040" x="80" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="arch3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;طبقة التطبيق (Application)&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;Services: Activity, Destination, Hotel, Weather, Dashboard, ...&lt;br/&gt;Notifications, Jobs, Artisan Commands, Policies&lt;/p&gt;" vertex="1">
+          <mxGeometry height="90" width="1040" x="80" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="arch4" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;طبقة المجال (Domain)&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;Eloquent Models (21): User, Activity, Booking, Destination, ...&lt;br/&gt;Traits: HasLocalizedAttributes, UploadImageTrait&lt;/p&gt;" vertex="1">
+          <mxGeometry height="90" width="1040" x="80" y="440" as="geometry" />
+        </mxCell>
+        <mxCell id="arch5" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;البنية التحتية (Infrastructure)&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;MySQL Database + Migrations/Seeders&lt;br/&gt;External: Weather API, Socialite OAuth, File Storage&lt;/p&gt;" vertex="1">
+          <mxGeometry height="90" width="1040" x="80" y="560" as="geometry" />
+        </mxCell>
+        <mxCell id="ae1" edge="1" parent="1" source="arch1" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="arch2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ae2" edge="1" parent="1" source="arch2" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="arch3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ae3" edge="1" parent="1" source="arch3" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="arch4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ae4" edge="1" parent="1" source="arch4" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="arch5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="p1" name="١ - النماذج (Class Diagram)">
+    <mxGraphModel dx="1336" dy="636" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1300" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="banner" parent="1" style="text;html=1;strokeColor=#6c8ebf;fillColor=#dae8fc;align=center;verticalAlign=middle;rounded=1;fontSize=12;" value="&lt;b style=&quot;font-size:16px;&quot;&gt;مخطط الفئات - نماذج Eloquent (21 صنف)&lt;/b&gt;&lt;div&gt;&lt;br/&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="50" width="1320" x="40" y="10" as="geometry" />
+        </mxCell>
+        <mxCell id="m10" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;Badge&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;name, slug, icon&lt;br/&gt;+ users() BelongsToMany&lt;/p&gt;" vertex="1">
+          <mxGeometry height="100" width="220" x="720" y="742.5" as="geometry" />
+        </mxCell>
+        <mxCell id="m11" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;CouponUser&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;pivot coupon_user&lt;br/&gt;coupon_id, user_id, booking_id&lt;br/&gt;+ coupon(), user(), booking()&lt;/p&gt;" vertex="1">
+          <mxGeometry height="115" width="220" x="480" y="735" as="geometry" />
+        </mxCell>
+        <mxCell id="m12" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;Booking&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;---&lt;br/&gt;user_id, activity_id&lt;br/&gt;status, payment_status&lt;br/&gt;total_price, booking_reference&lt;br/&gt;---&lt;br/&gt;+ user(), activity() BelongsTo&lt;br/&gt;+ couponUsages() HasMany&lt;/p&gt;" vertex="1">
+          <mxGeometry height="160" width="220" x="780" y="340" as="geometry" />
+        </mxCell>
+        <mxCell id="m13" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;Setting&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;minimal class (extends Model)&lt;/p&gt;" vertex="1">
+          <mxGeometry height="70" width="220" x="940" y="890" as="geometry" />
+        </mxCell>
+        <mxCell id="m14" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;Gallery&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;galleryable_id/type&lt;br/&gt;image_path, order&lt;br/&gt;+ galleryable() MorphTo&lt;/p&gt;" vertex="1">
+          <mxGeometry height="110" width="220" x="870" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="m15" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;Review&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;user_id, activity_id&lt;br/&gt;rating, is_approved&lt;br/&gt;+ user(), activity()&lt;/p&gt;" vertex="1">
+          <mxGeometry height="110" width="220" x="280" y="580" as="geometry" />
+        </mxCell>
+        <mxCell id="m16" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;Comment&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;user_id, activity_id&lt;br/&gt;comment, is_approved&lt;br/&gt;+ user(), activity()&lt;/p&gt;" vertex="1">
+          <mxGeometry height="110" width="220" x="510" y="580" as="geometry" />
+        </mxCell>
+        <mxCell id="m17" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;User&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;extends Authenticatable&lt;br/&gt;---&lt;br/&gt;id, name, email, role&lt;br/&gt;is_content_provider&lt;br/&gt;content_provider_status&lt;br/&gt;can_login&lt;br/&gt;---&lt;br/&gt;+ favorites() HasMany&lt;br/&gt;+ bookings() HasMany&lt;br/&gt;+ badges() BelongsToMany&lt;br/&gt;+ usedCoupons() BelongsToMany&lt;br/&gt;+ providedActivities() HasMany&lt;br/&gt;+ contentProviderApplications()&lt;br/&gt;+ latestContentProviderApplication() HasOne&lt;/p&gt;" vertex="1">
+          <mxGeometry height="200" width="220" x="360" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="m18" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;Coupon&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;code, discount_type&lt;br/&gt;+ users() BelongsToMany&lt;/p&gt;" vertex="1">
+          <mxGeometry height="115" width="220" x="260" y="752.5" as="geometry" />
+        </mxCell>
+        <mxCell id="m19" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;Hotel&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;destination_id&lt;br/&gt;name_ar/en, star_rating&lt;br/&gt;+ destination() BelongsTo&lt;/p&gt;" vertex="1">
+          <mxGeometry height="120" width="220" x="40" y="580" as="geometry" />
+        </mxCell>
+        <mxCell id="m20" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;Weather&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;destination_id&lt;br/&gt;temperature, condition&lt;br/&gt;+ destination()&lt;/p&gt;" vertex="1">
+          <mxGeometry height="100" width="220" x="40" y="760" as="geometry" />
+        </mxCell>
+        <mxCell id="m21" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;Contact&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;name, email, message&lt;br/&gt;status&lt;/p&gt;" vertex="1">
+          <mxGeometry height="100" width="220" x="40" y="920" as="geometry" />
+        </mxCell>
+        <mxCell id="m22" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;UserRecommendation&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;minimal class (extends Model)&lt;/p&gt;" vertex="1">
+          <mxGeometry height="70" width="220" x="670" y="930" as="geometry" />
+        </mxCell>
+        <mxCell id="m23" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;Destination&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;uses HasLocalizedAttributes&lt;br/&gt;---&lt;br/&gt;name_ar/en, lat, lng&lt;br/&gt;---&lt;br/&gt;+ activities() HasMany&lt;br/&gt;+ hotels() / activeHotels() HasMany&lt;br/&gt;+ weather() HasOne&lt;br/&gt;+ weatherHistory() HasMany&lt;br/&gt;+ favorites() MorphMany&lt;br/&gt;+ gallery() MorphMany&lt;/p&gt;" vertex="1">
+          <mxGeometry height="175" width="220" x="40" y="340" as="geometry" />
+        </mxCell>
+        <mxCell id="m24" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;Activity&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;uses HasLocalizedAttributes&lt;br/&gt;---&lt;br/&gt;destination_id, provider_id&lt;br/&gt;price, provider_review_status&lt;br/&gt;requires_booking, event_date&lt;br/&gt;---&lt;br/&gt;+ destination() BelongsTo&lt;br/&gt;+ provider() BelongsTo&lt;br/&gt;+ reviews()/approvedReviews()&lt;br/&gt;+ comments()/approvedComments()&lt;br/&gt;+ bookings() HasMany&lt;br/&gt;+ favorites(), gallery() MorphMany&lt;br/&gt;+ associations() HasMany&lt;/p&gt;" vertex="1">
+          <mxGeometry height="200" width="220" x="490" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="m25" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;TravelPage&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;minimal class (extends Model)&lt;/p&gt;" vertex="1">
+          <mxGeometry height="70" width="220" x="440" y="935" as="geometry" />
+        </mxCell>
+        <mxCell id="m26" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;ContentProviderApplication&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;user_id, admin_id&lt;br/&gt;status, activity_type&lt;br/&gt;+ user(), admin()&lt;/p&gt;" vertex="1">
+          <mxGeometry height="130" width="220" x="100" y="95" as="geometry" />
+        </mxCell>
+        <mxCell id="m27" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;TravelBasic&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;uses HasLocalizedAttributes&lt;br/&gt;title_ar/en, order&lt;br/&gt;scopeActive(), scopeOrdered()&lt;/p&gt;" vertex="1">
+          <mxGeometry height="115" width="220" x="780" y="580" as="geometry" />
+        </mxCell>
+        <mxCell id="m28" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;Favorite&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;user_id&lt;br/&gt;favoritable_id/type&lt;br/&gt;+ user() BelongsTo&lt;br/&gt;+ favoritable() MorphTo&lt;/p&gt;" vertex="1">
+          <mxGeometry height="120" width="220" x="610" y="95" as="geometry" />
+        </mxCell>
+        <mxCell id="m29" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;TravelBasicCategory&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;minimal class (extends Model)&lt;/p&gt;" vertex="1">
+          <mxGeometry height="70" width="220" x="200" y="940" as="geometry" />
+        </mxCell>
+        <mxCell id="m30" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;ActivityAssociation&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;activity_id&lt;br/&gt;associated_activity_id&lt;br/&gt;support, confidence&lt;br/&gt;+ activity(), associatedActivity()&lt;/p&gt;" vertex="1">
+          <mxGeometry height="130" width="220" x="820" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="e100" edge="1" parent="1" source="m23" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="m24" value="1 -- *">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e101" edge="1" parent="1" source="m17" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="m24" value="1 -- * (provider)">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e102" edge="1" parent="1" source="m17" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="m12" value="1 -- *">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e103" edge="1" parent="1" source="m24" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="m12" value="1 -- *">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e104" edge="1" parent="1" source="m17" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="m15" value="1 -- *">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e105" edge="1" parent="1" source="m24" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="m15" value="1 -- *">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e106" edge="1" parent="1" source="m17" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="m16" value="1 -- *">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e107" edge="1" parent="1" source="m24" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="m16" value="1 -- *">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e108" edge="1" parent="1" source="m23" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="m19" value="1 -- *">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e109" edge="1" parent="1" source="m23" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="m20" value="1 -- *">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e110" edge="1" parent="1" source="m23" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="m20" value="1 -- 1 latest">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e111" edge="1" parent="1" source="m17" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="m28" value="1 -- *">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e112" edge="1" parent="1" source="m24" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;dashed=1;" target="m28" value="morph 1 -- *">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e113" edge="1" parent="1" source="m23" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;dashed=1;" target="m28" value="morph 1 -- *">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e114" edge="1" parent="1" source="m24" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;dashed=1;" target="m14" value="morph 1 -- *">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e115" edge="1" parent="1" source="m23" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;dashed=1;" target="m14" value="morph 1 -- *">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e116" edge="1" parent="1" source="m17" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="m10" value="* -- * badge_user">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e117" edge="1" parent="1" source="m17" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="m18" value="* -- * coupon_user">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e118" edge="1" parent="1" source="m12" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="m11" value="1 -- *">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e119" edge="1" parent="1" source="m11" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="m18" value="* -- 1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e120" edge="1" parent="1" source="m11" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="m17" value="* -- 1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e121" edge="1" parent="1" source="m17" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="m26" value="1 -- *">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e122" edge="1" parent="1" source="m17" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="m26" value="1 -- 1 latest">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e123" edge="1" parent="1" source="m24" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="m30" value="1 -- *">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e124" edge="1" parent="1" source="m30" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="m24" value="* -- 1 associated">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="pErd" name="٢ - قاعدة البيانات (ERD)">
+    <mxGraphModel dx="1813" dy="863" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="erd10" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;favorites&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;PK id&lt;br/&gt;FK user_id&lt;br/&gt;favoritable_id&lt;br/&gt;favoritable_type (morph)&lt;/p&gt;" vertex="1">
+          <mxGeometry height="110" width="200" x="40" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="erd11" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;notifications&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;id (uuid)&lt;br/&gt;type, notifiable&lt;br/&gt;data, read_at&lt;/p&gt;" vertex="1">
+          <mxGeometry height="90" width="200" x="940" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="erd12" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;activities&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;PK id&lt;br/&gt;FK destination_id&lt;br/&gt;FK provider_id -&gt; users&lt;br/&gt;price, provider_review_status&lt;br/&gt;is_event, event_date&lt;/p&gt;" vertex="1">
+          <mxGeometry height="140" width="200" x="520" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="erd13" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;bookings&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;PK id&lt;br/&gt;FK user_id&lt;br/&gt;FK activity_id&lt;br/&gt;status, payment_status&lt;br/&gt;total_price, booking_reference&lt;/p&gt;" vertex="1">
+          <mxGeometry height="130" width="200" x="740" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="erd14" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;coupons&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;PK id&lt;br/&gt;code, discount_type&lt;br/&gt;discount_value, is_active&lt;/p&gt;" vertex="1">
+          <mxGeometry height="100" width="200" x="460" y="270" as="geometry" />
+        </mxCell>
+        <mxCell id="erd15" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;galleries&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;PK id&lt;br/&gt;galleryable_id/type (morph)&lt;br/&gt;image_path, order&lt;/p&gt;" vertex="1">
+          <mxGeometry height="110" width="200" x="30" y="580" as="geometry" />
+        </mxCell>
+        <mxCell id="erd16" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;weather&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;PK id&lt;br/&gt;FK destination_id&lt;br/&gt;temperature, condition&lt;/p&gt;" vertex="1">
+          <mxGeometry height="100" width="200" x="240" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="erd17" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;users&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;PK id&lt;br/&gt;name, email, password&lt;br/&gt;role, is_content_provider&lt;br/&gt;content_provider_status&lt;/p&gt;" vertex="1">
+          <mxGeometry height="130" width="200" x="40" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="erd18" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;contacts&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;PK id&lt;br/&gt;name, email&lt;br/&gt;message, status&lt;/p&gt;" vertex="1">
+          <mxGeometry height="100" width="200" x="740" y="600" as="geometry" />
+        </mxCell>
+        <mxCell id="erd19" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;badges&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;PK id&lt;br/&gt;name, slug, icon&lt;/p&gt;" vertex="1">
+          <mxGeometry height="90" width="200" x="270" y="600" as="geometry" />
+        </mxCell>
+        <mxCell id="erd20" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;travel_basics&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;PK id&lt;br/&gt;title_ar/en&lt;br/&gt;order, is_active&lt;/p&gt;" vertex="1">
+          <mxGeometry height="100" width="200" x="930" y="470" as="geometry" />
+        </mxCell>
+        <mxCell id="erd21" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;activity_associations&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;PK id&lt;br/&gt;FK activity_id&lt;br/&gt;FK associated_activity_id&lt;br/&gt;support, confidence, lift&lt;/p&gt;" vertex="1">
+          <mxGeometry height="110" width="200" x="250" y="445" as="geometry" />
+        </mxCell>
+        <mxCell id="erd22" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;destinations&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;PK id&lt;br/&gt;name_ar, name_en&lt;br/&gt;latitude, longitude&lt;br/&gt;province&lt;/p&gt;" vertex="1">
+          <mxGeometry height="120" width="200" x="280" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="erd23" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;comments&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;PK id&lt;br/&gt;FK user_id&lt;br/&gt;FK activity_id&lt;br/&gt;comment, is_approved&lt;/p&gt;" vertex="1">
+          <mxGeometry height="100" width="200" x="470" y="450" as="geometry" />
+        </mxCell>
+        <mxCell id="erd24" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;content_provider_applications&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;PK id&lt;br/&gt;FK user_id&lt;br/&gt;FK admin_id&lt;br/&gt;status, activity_type&lt;/p&gt;" vertex="1">
+          <mxGeometry height="120" width="200" x="40" y="440" as="geometry" />
+        </mxCell>
+        <mxCell id="erd25" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;hotels&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;PK id&lt;br/&gt;FK destination_id&lt;br/&gt;name_ar/en, star_rating&lt;br/&gt;is_active&lt;/p&gt;" vertex="1">
+          <mxGeometry height="110" width="200" x="680" y="265" as="geometry" />
+        </mxCell>
+        <mxCell id="erd26" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;coupon_user&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;PK id&lt;br/&gt;FK coupon_id&lt;br/&gt;FK user_id&lt;br/&gt;FK booking_id&lt;br/&gt;used_at&lt;/p&gt;" vertex="1">
+          <mxGeometry height="110" width="200" x="720" y="450" as="geometry" />
+        </mxCell>
+        <mxCell id="erd27" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;badge_user&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;FK badge_id&lt;br/&gt;FK user_id&lt;br/&gt;earned_at&lt;/p&gt;" vertex="1">
+          <mxGeometry height="90" width="200" x="510" y="600" as="geometry" />
+        </mxCell>
+        <mxCell id="erd28" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;reviews&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;PK id&lt;br/&gt;FK user_id&lt;br/&gt;FK activity_id&lt;br/&gt;rating, is_approved&lt;/p&gt;" vertex="1">
+          <mxGeometry height="100" width="200" x="890" y="275" as="geometry" />
+        </mxCell>
+        <mxCell id="eri200" edge="1" parent="1" source="erd22" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="erd12" value="FK">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="eri201" edge="1" parent="1" source="erd17" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="erd12" value="provider">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="eri202" edge="1" parent="1" source="erd22" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="erd25" value="FK">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="eri203" edge="1" parent="1" source="erd17" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="erd13" value="FK">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="eri204" edge="1" parent="1" source="erd12" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="erd13" value="FK">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="eri205" edge="1" parent="1" source="erd17" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="erd28" value="FK">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="eri206" edge="1" parent="1" source="erd12" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="erd28" value="FK">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="eri207" edge="1" parent="1" source="erd17" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="erd23" value="FK">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="eri208" edge="1" parent="1" source="erd12" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="erd23" value="FK">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="eri209" edge="1" parent="1" source="erd17" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="erd10" value="FK">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="eri210" edge="1" parent="1" source="erd22" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="erd16" value="FK">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="eri211" edge="1" parent="1" source="erd17" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="erd24" value="FK">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="eri212" edge="1" parent="1" source="erd17" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="erd26" value="admin">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="eri213" edge="1" parent="1" source="erd14" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="erd26" value="FK">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="eri214" edge="1" parent="1" source="erd13" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="erd26" value="FK">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="eri215" edge="1" parent="1" source="erd12" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="erd21" value="FK">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="p2" name="٣ - الخدمات">
+    <mxGraphModel dx="1269" dy="604" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1300" pageHeight="750" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="s20" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;ActivityService&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;إدارة الأنشطة + أقسام ثنائية اللغة&lt;br/&gt;يعتمد على: Activity&lt;/p&gt;" vertex="1">
+          <mxGeometry height="90" width="280" x="40" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="s21" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;DestinationService&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;إدارة الوجهات&lt;br/&gt;يعتمد على: Destination&lt;/p&gt;" vertex="1">
+          <mxGeometry height="90" width="280" x="320" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="s22" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;HotelService&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;إدارة الفنادق&lt;br/&gt;يعتمد على: Hotel&lt;/p&gt;" vertex="1">
+          <mxGeometry height="90" width="280" x="600" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="s23" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;WeatherService&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;جلب/تحديث الطقس من API&lt;br/&gt;يعتمد على: Destination, Weather&lt;/p&gt;" vertex="1">
+          <mxGeometry height="90" width="280" x="880" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="s24" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;DashboardService&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;إحصائيات لوحة المدير&lt;br/&gt;يعتمد على: Destination, Activity, Booking, User, Review, Contact&lt;/p&gt;" vertex="1">
+          <mxGeometry height="90" width="280" x="40" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="s25" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;UserService&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;إدارة المستخدمين&lt;br/&gt;يعتمد على: User&lt;/p&gt;" vertex="1">
+          <mxGeometry height="90" width="280" x="320" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="s26" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;ProviderEarningsService&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;حساب أرباح المزود&lt;br/&gt;يعتمد على: User, Booking&lt;/p&gt;" vertex="1">
+          <mxGeometry height="90" width="280" x="600" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="s27" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;ActivityAssociationService&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;بناء توصيات الارتباط&lt;br/&gt;يعتمد على: Booking, ActivityAssociation&lt;/p&gt;" vertex="1">
+          <mxGeometry height="90" width="280" x="880" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="s28" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;MissingEnglishFieldsService&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;تدقيق الحقول الإنجليزية الناقصة&lt;br/&gt;يعتمد على: n/a&lt;/p&gt;" vertex="1">
+          <mxGeometry height="90" width="280" x="40" y="270" as="geometry" />
+        </mxCell>
+        <mxCell id="s99" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;المهام والأوامر&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;UpdateWeatherJob (طابور)&lt;br/&gt;BuildActivityAssociations (أمر artisan)&lt;br/&gt;CheckImages (أمر artisan)&lt;/p&gt;" vertex="1">
+          <mxGeometry height="70" width="500" x="40" y="390" as="geometry" />
+        </mxCell>
+        <mxCell id="s98" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;السمات (Traits)&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;HasLocalizedAttributes -&gt; Activity, Destination, Hotel, TravelBasic&lt;br/&gt;UploadImageTrait -&gt; أدوات رفع الصور&lt;/p&gt;" vertex="1">
+          <mxGeometry height="90" width="380" x="560" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="s97" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;سياسة الحجز BookingPolicy&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;تفويض الوصول لعمليات الحجز&lt;/p&gt;" vertex="1">
+          <mxGeometry height="70" width="200" x="560" y="390" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="p3" name="٤ - المتحكمات">
+    <mxGraphModel dx="1586" dy="755" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="950" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="c30" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;Provider&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;- DashboardController&lt;br/&gt;- ApplicationStatusController&lt;br/&gt;- ActivityGalleryController&lt;/p&gt;" vertex="1">
+          <mxGeometry height="100" width="520" x="40" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="c31" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;Public / Root&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;- HomeController&lt;br/&gt;- EventController&lt;br/&gt;- ContactController&lt;br/&gt;- WeatherController&lt;br/&gt;- TravelBasicsController&lt;br/&gt;- TravelPageController&lt;br/&gt;- InteractiveMapController&lt;br/&gt;- ProvinceController&lt;br/&gt;- NotificationController&lt;br/&gt;- ProviderStorefrontController&lt;/p&gt;" vertex="1">
+          <mxGeometry height="240" width="520" x="40" y="175" as="geometry" />
+        </mxCell>
+        <mxCell id="c32" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;User / Website&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;- AuthController&lt;br/&gt;- DestinationController&lt;br/&gt;- ActivityController&lt;br/&gt;- HotelController&lt;br/&gt;- BookingController&lt;br/&gt;- ReviewController&lt;br/&gt;- CommentController&lt;br/&gt;- FavoriteController&lt;br/&gt;- RecommendationController&lt;br/&gt;- StatisticsController&lt;/p&gt;" vertex="1">
+          <mxGeometry height="240" width="520" x="40" y="440" as="geometry" />
+        </mxCell>
+        <mxCell id="c33" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;Admin (App\Http\Controllers\Admin)&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;- AuthController&lt;br/&gt;- DashboardController&lt;br/&gt;- DestinationController&lt;br/&gt;- ActivityController&lt;br/&gt;- HotelController&lt;br/&gt;- BookingController&lt;br/&gt;- UserController&lt;br/&gt;- ContentProviderController&lt;br/&gt;- CouponController&lt;br/&gt;- ReviewController&lt;br/&gt;- CommentController&lt;br/&gt;- ContactController&lt;br/&gt;- GalleryController&lt;br/&gt;- BadgeController&lt;br/&gt;- SettingController&lt;br/&gt;- TravelBasicController&lt;br/&gt;- TravelBasicCategoryController&lt;br/&gt;- TravelPageController&lt;br/&gt;- RecommendationInsightsController&lt;/p&gt;" vertex="1">
+          <mxGeometry height="420" width="520" x="570" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="cbase" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;Controller أساسي (مجرد)&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;extends Illuminate\Routing\Controller&lt;br/&gt;كل متحكمات HTTP ترث App\Http\Controllers\Controller&lt;/p&gt;" vertex="1">
+          <mxGeometry height="60" width="280" x="560" y="50" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="p4" name="٥ - الإشعارات">
+    <mxGraphModel dx="1269" dy="604" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1000" pageHeight="550" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="nBookingCreated" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;BookingCreated&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;extends Notification&lt;br/&gt;قنوات: mail / database&lt;/p&gt;" vertex="1">
+          <mxGeometry height="60" width="420" x="30" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="nBookingConfirmed" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;BookingConfirmed&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;extends Notification&lt;br/&gt;قنوات: mail / database&lt;/p&gt;" vertex="1">
+          <mxGeometry height="60" width="420" x="40" y="125" as="geometry" />
+        </mxCell>
+        <mxCell id="nBookingCancelled" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;BookingCancelled&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;extends Notification&lt;br/&gt;قنوات: mail / database&lt;/p&gt;" vertex="1">
+          <mxGeometry height="60" width="420" x="40" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="nProviderBookingCreated" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;ProviderBookingCreated&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;extends Notification&lt;br/&gt;قنوات: mail / database&lt;/p&gt;" vertex="1">
+          <mxGeometry height="60" width="420" x="40" y="255" as="geometry" />
+        </mxCell>
+        <mxCell id="nContentProviderApplicationReviewed" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;ContentProviderApplicationReviewed&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;extends Notification&lt;br/&gt;قنوات: mail / database&lt;/p&gt;" vertex="1">
+          <mxGeometry height="60" width="420" x="40" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="nNewContactMessage" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;NewContactMessage&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;extends Notification&lt;br/&gt;قنوات: mail / database&lt;/p&gt;" vertex="1">
+          <mxGeometry height="60" width="420" x="40" y="385" as="geometry" />
+        </mxCell>
+        <mxCell id="nBadgeEarned" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;BadgeEarned&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;extends Notification&lt;br/&gt;قنوات: mail / database&lt;/p&gt;" vertex="1">
+          <mxGeometry height="60" width="420" x="40" y="450" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="p5" name="٦ - البنية التحتية">
+    <mxGraphModel dx="1269" dy="604" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1300" pageHeight="820" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="i1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;Middleware HTTP&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;Authenticate&lt;br/&gt;RedirectIfAuthenticated&lt;br/&gt;EnsureApprovedContentProvider&lt;br/&gt;IsAdmin&lt;br/&gt;SetLocale&lt;br/&gt;VerifyCsrfToken&lt;br/&gt;EncryptCookies&lt;br/&gt;TrimStrings&lt;br/&gt;ValidateSignature&lt;br/&gt;TrustHosts&lt;br/&gt;TrustProxies&lt;br/&gt;PreventRequestsDuringMaintenance&lt;/p&gt;" vertex="1">
+          <mxGeometry height="290" width="360" x="40" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="i2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;طلبات التحقق Form Requests&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;ActivityRequest&lt;br/&gt;DestinationRequest&lt;br/&gt;HotelRequest&lt;br/&gt;ReviewRequest&lt;br/&gt;CommentRequest&lt;/p&gt;" vertex="1">
+          <mxGeometry height="170" width="360" x="440" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="i3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;السياسات Policies&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;BookingPolicy (authorize)&lt;/p&gt;" vertex="1">
+          <mxGeometry height="110" width="360" x="10" y="360" as="geometry" />
+        </mxCell>
+        <mxCell id="i4" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;أوامر Artisan&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;BuildActivityAssociations&lt;br/&gt;CheckImages&lt;/p&gt;" vertex="1">
+          <mxGeometry height="110" width="360" x="430" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="i5" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;مهام الطابور Jobs&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;UpdateWeatherJob&lt;/p&gt;" vertex="1">
+          <mxGeometry height="80" width="360" x="410" y="370" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="p6" name="٧ - المتطلبات (وظيفية/غير وظيفية)">
+    <mxGraphModel dx="1813" dy="863" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1500" pageHeight="950" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="r0" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;مخطط المتطلبات - دليل السائح&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;الجهات الفاعلة + المتطلبات الوظيفية + المتطلبات غير الوظيفية&lt;br/&gt;مستخلص من المسارات والمتحكمات والـ middleware وطبقة الخدمات&lt;/p&gt;" vertex="1">
+          <mxGeometry height="60" width="1090" x="40" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="r1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;الفاعل: زائر&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;تصفح الوجهات والأنشطة والفنادق&lt;br/&gt;عرض أساسيات السفر والخريطة والفعاليات&lt;/p&gt;" vertex="1">
+          <mxGeometry height="70" width="220" x="40" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="r2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;الفاعل: مستخدم&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;سائح مسجل دخول&lt;br/&gt;الحجوزات والتقييمات والتعليقات والمفضلة&lt;/p&gt;" vertex="1">
+          <mxGeometry height="70" width="220" x="40" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="r3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;الفاعل: مزود محتوى&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;مزود محتوى معتمد&lt;br/&gt;إدارة الأنشطة والمعرض والحجوزات&lt;/p&gt;" vertex="1">
+          <mxGeometry height="70" width="220" x="40" y="290" as="geometry" />
+        </mxCell>
+        <mxCell id="r4" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;الفاعل: مدير&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;الإشراف والتحكم بالمنصة&lt;/p&gt;" vertex="1">
+          <mxGeometry height="70" width="220" x="40" y="380" as="geometry" />
+        </mxCell>
+        <mxCell id="rHdrFr" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;المتطلبات الوظيفية (Functional Requirements)&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;/p&gt;" vertex="1">
+          <mxGeometry height="35" width="840" x="280" y="95" as="geometry" />
+        </mxCell>
+        <mxCell id="r10" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;FR1 - المصادقة والحسابات&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;تسجيل/دخول + تسجيل اجتماعي (Socialite)&lt;br/&gt;تسجيل مزود محتوى ومتابعة حالة الطلب&lt;br/&gt;صلاحيات حسب الدور: user / provider / admin&lt;/p&gt;" vertex="1">
+          <mxGeometry height="115" width="320" x="280" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="r11" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;FR2 - استكشاف المحتوى&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;عرض الوجهات والأنشطة والفنادق&lt;br/&gt;تقويم الفعاليات والخريطة التفاعلية&lt;br/&gt;طقس الوجهة + مقارنة الوجهات + توصيات&lt;/p&gt;" vertex="1">
+          <mxGeometry height="115" width="320" x="620" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="r12" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;FR3 - الحجوزات&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;إنشاء حجز وعرض السجل&lt;br/&gt;إلغاء الحجز والتحقق من الكوبون&lt;br/&gt;حالة الدفع وأرباح المزود&lt;/p&gt;" vertex="1">
+          <mxGeometry height="115" width="170" x="960" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="r13" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;FR4 - التفاعل&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;تقييمات وتعليقات على الأنشطة&lt;br/&gt;المفضلة (toggle + قائمة)&lt;br/&gt;مركز الإشعارات&lt;/p&gt;" vertex="1">
+          <mxGeometry height="115" width="320" x="280" y="270" as="geometry" />
+        </mxCell>
+        <mxCell id="r14" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;FR5 - مزود المحتوى&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;لوحة تحكم المزود وتحديث الحساب&lt;br/&gt;CRUD أنشطة + معرض صور&lt;br/&gt;تصدير CSV للحجوزات والأرباح&lt;/p&gt;" vertex="1">
+          <mxGeometry height="115" width="320" x="620" y="270" as="geometry" />
+        </mxCell>
+        <mxCell id="r15" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;FR6 - الإدارة&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;إدارة وجهات/أنشطة/فنادق/مستخدمين&lt;br/&gt;إشراف على تقييمات/تعليقات/حجوزات&lt;br/&gt;كوبونات + رسائل تواصل + اعتماد مزودين&lt;/p&gt;" vertex="1">
+          <mxGeometry height="115" width="220" x="960" y="270" as="geometry" />
+        </mxCell>
+        <mxCell id="r16" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;FR7 - التوصيات&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;توصيات الأنشطة المرتبطة&lt;br/&gt;تحليلات التوصيات للمدير&lt;/p&gt;" vertex="1">
+          <mxGeometry height="115" width="320" x="280" y="400" as="geometry" />
+        </mxCell>
+        <mxCell id="r17" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;FR8 - اللغات&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;حقول عربي/إنجليزي للمحتوى&lt;br/&gt;تبديل اللغة وسمة HasLocalizedAttributes&lt;/p&gt;" vertex="1">
+          <mxGeometry height="115" width="320" x="620" y="400" as="geometry" />
+        </mxCell>
+        <mxCell id="r18" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;FR9 - التواصل&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;نموذج تواصل من الموقع&lt;br/&gt;معالجة الرسائل من لوحة المدير&lt;/p&gt;" vertex="1">
+          <mxGeometry height="100" width="320" x="885" y="407.5" as="geometry" />
+        </mxCell>
+        <mxCell id="r19" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;FR10 - واجهة الشركاء&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;قائمة الشركاء وصفحة متجر المزود (storefront)&lt;/p&gt;" vertex="1">
+          <mxGeometry height="100" width="320" x="280" y="530" as="geometry" />
+        </mxCell>
+        <mxCell id="rHdrNfr" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;المتطلبات غير الوظيفية (Non-Functional)&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;/p&gt;" vertex="1">
+          <mxGeometry height="35" width="380" x="460" y="630" as="geometry" />
+        </mxCell>
+        <mxCell id="r20" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;NFR1 - الأمان&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;طبقة حماية المصادقة و CSRF&lt;br/&gt;حراس الصلاحيات للمدير/المزود وسياسات التفويض&lt;br/&gt;روابط موقعة والتحقق من الطلبات&lt;/p&gt;" vertex="1">
+          <mxGeometry height="130" width="400" x="50" y="670" as="geometry" />
+        </mxCell>
+        <mxCell id="r21" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;NFR2 - الأداء والتوسع&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;استعلامات مفهرسة للارتباطات والطقس&lt;br/&gt;مهام طابور لتحديث بيانات الطقس&lt;br/&gt;صفحات فعالة في مسارات المستخدم والمدير&lt;/p&gt;" vertex="1">
+          <mxGeometry height="130" width="400" x="470" y="670" as="geometry" />
+        </mxCell>
+        <mxCell id="r22" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="&lt;p style=&quot;margin:4px;font-size:11px;&quot;&gt;&lt;b&gt;NFR3 - الصيانة&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;طبقة خدمات منفصلة لمنطق الأعمال&lt;br/&gt;FormRequests للتحقق من المدخلات&lt;br/&gt;متحكمات منظمة حسب الدور والمجال&lt;/p&gt;" vertex="1">
+          <mxGeometry height="130" width="400" x="890" y="670" as="geometry" />
+        </mxCell>
+        <mxCell id="re1" edge="1" parent="1" source="r1" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="r11" value="يستخدم">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="re2" edge="1" parent="1" source="r1" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="r18" value="يستخدم">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="re3" edge="1" parent="1" source="r2" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="r10" value="يستخدم">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="re4" edge="1" parent="1" source="r2" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="r12" value="يستخدم">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="re5" edge="1" parent="1" source="r2" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="r13" value="يستخدم">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="re6" edge="1" parent="1" source="r3" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="r14" value="يستخدم">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="re7" edge="1" parent="1" source="r4" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="r15" value="يدير">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="re8" edge="1" parent="1" source="r4" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="r16" value="يدير">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="p7" name="٨ - حالات الاستخدام (Use Case)">
+    <mxGraphModel dx="2538" dy="1208" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2000" pageHeight="1350" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="uTitle" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=18;fontStyle=1;" value="مخطط حالات الاستخدام الموسّع - منصة دليل السائح" vertex="1">
+          <mxGeometry height="40" width="860" x="520" y="10" as="geometry" />
+        </mxCell>
+        <mxCell id="uBoundary" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;strokeWidth=2;align=left;verticalAlign=top;spacingLeft=10;spacingTop=8;fontStyle=1;" value="حدود النظام: نظام دليل السائح" vertex="1">
+          <mxGeometry height="1000" width="1480" x="300" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="aGuest" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" value="زائر" vertex="1">
+          <mxGeometry height="120" width="60" x="190" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="aUser" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" value="مستخدم" vertex="1">
+          <mxGeometry height="120" width="60" x="200" y="370" as="geometry" />
+        </mxCell>
+        <mxCell id="aProvider" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" value="مزود محتوى" vertex="1">
+          <mxGeometry height="120" width="60" x="200" y="590" as="geometry" />
+        </mxCell>
+        <mxCell id="aAdmin" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" value="مدير" vertex="1">
+          <mxGeometry height="120" width="60" x="210" y="880" as="geometry" />
+        </mxCell>
+        <mxCell id="aWeatherApi" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" value="خدمة الطقس الخارجية" vertex="1">
+          <mxGeometry height="130" width="80" x="1610" y="165" as="geometry" />
+        </mxCell>
+        <mxCell id="uc1" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="تصفح الوجهات" vertex="1">
+          <mxGeometry height="60" width="210" x="360" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="uc2" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="تصفح الأنشطة" vertex="1">
+          <mxGeometry height="60" width="210" x="600" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="uc3" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="عرض تفاصيل وجهة/نشاط" vertex="1">
+          <mxGeometry height="60" width="250" x="840" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="uc4" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="عرض طقس الوجهات" vertex="1">
+          <mxGeometry height="60" width="220" x="1120" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="uc5" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="عرض الفعاليات والتقويم" vertex="1">
+          <mxGeometry height="60" width="250" x="360" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="uc6" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="استعراض الخريطة التفاعلية" vertex="1">
+          <mxGeometry height="60" width="260" x="640" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="uc7" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="عرض أساسيات السفر" vertex="1">
+          <mxGeometry height="60" width="210" x="930" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="uc8" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="التسجيل/تسجيل الدخول" vertex="1">
+          <mxGeometry height="60" width="230" x="360" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="uc9" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" value="تسجيل دخول اجتماعي" vertex="1">
+          <mxGeometry height="60" width="210" x="620" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="uc10" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="إدارة الملف الشخصي" vertex="1">
+          <mxGeometry height="60" width="210" x="860" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="uc11" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="إضافة للمفضلة/إزالتها" vertex="1">
+          <mxGeometry height="60" width="240" x="1100" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="uc12" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="عرض صفحة المفضلة" vertex="1">
+          <mxGeometry height="60" width="210" x="1360" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="uc13" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="إنشاء حجز نشاط" vertex="1">
+          <mxGeometry height="60" width="210" x="360" y="410" as="geometry" />
+        </mxCell>
+        <mxCell id="uc14" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" value="التحقق من الكوبون" vertex="1">
+          <mxGeometry height="60" width="210" x="600" y="410" as="geometry" />
+        </mxCell>
+        <mxCell id="uc15" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="عرض الحجوزات" vertex="1">
+          <mxGeometry height="60" width="190" x="840" y="410" as="geometry" />
+        </mxCell>
+        <mxCell id="uc16" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="إلغاء الحجز" vertex="1">
+          <mxGeometry height="60" width="180" x="1060" y="410" as="geometry" />
+        </mxCell>
+        <mxCell id="uc17" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="إدارة الإشعارات" vertex="1">
+          <mxGeometry height="60" width="200" x="1260" y="410" as="geometry" />
+        </mxCell>
+        <mxCell id="uc18" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="إضافة تقييم/تعليق" vertex="1">
+          <mxGeometry height="60" width="200" x="1480" y="410" as="geometry" />
+        </mxCell>
+        <mxCell id="uc19" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" value="تقديم طلب مزود محتوى" vertex="1">
+          <mxGeometry height="60" width="260" x="360" y="580" as="geometry" />
+        </mxCell>
+        <mxCell id="uc20" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" value="متابعة حالة الطلب" vertex="1">
+          <mxGeometry height="60" width="220" x="650" y="580" as="geometry" />
+        </mxCell>
+        <mxCell id="uc21" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" value="لوحة تحكم المزود" vertex="1">
+          <mxGeometry height="60" width="210" x="900" y="580" as="geometry" />
+        </mxCell>
+        <mxCell id="uc22" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" value="إدارة الأنشطة (CRUD)" vertex="1">
+          <mxGeometry height="60" width="220" x="1140" y="580" as="geometry" />
+        </mxCell>
+        <mxCell id="uc23" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" value="إدارة معرض الصور" vertex="1">
+          <mxGeometry height="60" width="210" x="1390" y="580" as="geometry" />
+        </mxCell>
+        <mxCell id="uc24" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" value="تصدير الحجوزات/الأرباح CSV" vertex="1">
+          <mxGeometry height="60" width="280" x="360" y="660" as="geometry" />
+        </mxCell>
+        <mxCell id="uc25" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" value="إدارة حساب المزود" vertex="1">
+          <mxGeometry height="60" width="220" x="670" y="660" as="geometry" />
+        </mxCell>
+        <mxCell id="uc26" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" value="تسجيل دخول المدير" vertex="1">
+          <mxGeometry height="60" width="210" x="360" y="860" as="geometry" />
+        </mxCell>
+        <mxCell id="uc27" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" value="مراجعة طلبات مزودي المحتوى" vertex="1">
+          <mxGeometry height="60" width="270" x="600" y="860" as="geometry" />
+        </mxCell>
+        <mxCell id="uc28" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" value="إدارة الوجهات/الأنشطة/الفنادق" vertex="1">
+          <mxGeometry height="60" width="320" x="900" y="860" as="geometry" />
+        </mxCell>
+        <mxCell id="uc29" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" value="إدارة الحجوزات/المدفوعات" vertex="1">
+          <mxGeometry height="60" width="270" x="1250" y="860" as="geometry" />
+        </mxCell>
+        <mxCell id="uc30" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" value="إدارة التعليقات/التقييمات" vertex="1">
+          <mxGeometry height="60" width="250" x="1540" y="860" as="geometry" />
+        </mxCell>
+        <mxCell id="uc31" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" value="إدارة الكوبونات" vertex="1">
+          <mxGeometry height="60" width="200" x="360" y="940" as="geometry" />
+        </mxCell>
+        <mxCell id="uc32" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" value="إدارة المستخدمين" vertex="1">
+          <mxGeometry height="60" width="200" x="590" y="940" as="geometry" />
+        </mxCell>
+        <mxCell id="uc33" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" value="إدارة رسائل التواصل" vertex="1">
+          <mxGeometry height="60" width="230" x="820" y="940" as="geometry" />
+        </mxCell>
+        <mxCell id="uc34" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" value="إدارة أساسيات السفر" vertex="1">
+          <mxGeometry height="60" width="230" x="1080" y="940" as="geometry" />
+        </mxCell>
+        <mxCell id="uc35" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" value="عرض تحليلات التوصيات" vertex="1">
+          <mxGeometry height="60" width="240" x="1340" y="940" as="geometry" />
+        </mxCell>
+        <mxCell id="ue1" edge="1" parent="1" source="aGuest" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="uc1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ue2" edge="1" parent="1" source="aGuest" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="uc2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ue3" edge="1" parent="1" source="aGuest" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="uc3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ue4" edge="1" parent="1" source="aGuest" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="uc4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ue5" edge="1" parent="1" source="aGuest" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="uc5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ue6" edge="1" parent="1" source="aGuest" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="uc6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ue7" edge="1" parent="1" source="aGuest" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="uc7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ue8" edge="1" parent="1" source="aUser" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="uc8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ue9" edge="1" parent="1" source="aUser" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="uc10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ue10" edge="1" parent="1" source="aUser" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="uc11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ue11" edge="1" parent="1" source="aUser" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="uc12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ue12" edge="1" parent="1" source="aUser" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="uc13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ue13" edge="1" parent="1" source="aUser" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="uc15">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ue14" edge="1" parent="1" source="aUser" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="uc16">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ue15" edge="1" parent="1" source="aUser" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="uc17">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ue16" edge="1" parent="1" source="aUser" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="uc18">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ue17" edge="1" parent="1" source="aProvider" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="uc19">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ue18" edge="1" parent="1" source="aProvider" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="uc20">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ue19" edge="1" parent="1" source="aProvider" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="uc21">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ue20" edge="1" parent="1" source="aProvider" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="uc22">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ue21" edge="1" parent="1" source="aProvider" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="uc23">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ue22" edge="1" parent="1" source="aProvider" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="uc24">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ue23" edge="1" parent="1" source="aProvider" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="uc25">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ue24" edge="1" parent="1" source="aAdmin" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="uc26">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ue25" edge="1" parent="1" source="aAdmin" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="uc27">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ue26" edge="1" parent="1" source="aAdmin" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="uc28">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ue27" edge="1" parent="1" source="aAdmin" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="uc29">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ue28" edge="1" parent="1" source="aAdmin" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="uc30">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ue29" edge="1" parent="1" source="aAdmin" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="uc31">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ue30" edge="1" parent="1" source="aAdmin" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="uc32">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ue31" edge="1" parent="1" source="aAdmin" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="uc33">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ue32" edge="1" parent="1" source="aAdmin" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="uc34">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ue33" edge="1" parent="1" source="aAdmin" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="uc35">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ue34" edge="1" parent="1" source="aWeatherApi" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="uc4" value="API">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ue36" edge="1" parent="1" source="uc13" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="uc14" value="&lt;&lt;include&gt;&gt; True">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ue37" edge="1" parent="1" source="uc8" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="uc9" value="&lt;&lt;extend&gt;&gt; True">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ue38" edge="1" parent="1" source="uc22" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="uc23" value="&lt;&lt;include&gt;&gt; True">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ue39" edge="1" parent="1" source="uc27" style="endArrow=open;endFill=0;html=1;rounded=0;fontSize=10;" target="uc29" value="&lt;&lt;extend&gt;&gt; True">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="p0" name="٩ - دليل الاستخدام">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="t1" value="&lt;h1 style=&quot;margin:0;&quot;&gt;دليل السائح - دليل المخططات&lt;/h1&gt;&lt;p&gt;Tourist Guide - Laravel 10&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=18;" vertex="1" parent="1">
+          <mxGeometry x="120" y="30" width="860" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="t2" value="&lt;b&gt;كيف تفتح الملف&lt;/b&gt;&lt;hr/&gt;1) draw.io / diagrams.net&lt;br/&gt;2) File - Open from - Device&lt;br/&gt;3) اختر: docs/tourist-guide-diagrams.drawio&lt;br/&gt;4) استخدم التبويبات أسفل الشاشة" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;align=left;verticalAlign=top;spacingLeft=12;spacingTop=10;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="80" y="120" width="940" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="t3" value="&lt;b&gt;قائمة المخططات (١٠ صفحات)&lt;/b&gt;&lt;hr/&gt;٠ - نظرة عامة والبنية المعمارية&lt;br/&gt;١ - مخطط الفئات (Class Diagram) - 21 Model&lt;br/&gt;٢ - مخطط قاعدة البيانات (ERD)&lt;br/&gt;٣ - طبقة الخدمات والمهام&lt;br/&gt;٤ - المتحكمات (Controllers)&lt;br/&gt;٥ - الإشعارات (Notifications)&lt;br/&gt;٦ - البنية التحتية (Middleware/Requests/Policies)&lt;br/&gt;٧ - المتطلبات الوظيفية وغير الوظيفية&lt;br/&gt;٨ - مخطط حالات الاستخدام (Use Case)&lt;br/&gt;٩ - هذا الدليل" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;align=left;verticalAlign=top;spacingLeft=12;spacingTop=10;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="80" y="250" width="940" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="t4" value="&lt;b&gt;التدفق الرئيسي للمجال&lt;/b&gt;&lt;hr/&gt;مستخدم - حجز (Booking) - نشاط (Activity) - وجهة (Destination)&lt;br/&gt;مزود محتوى يدير الأنشطة بعد الاعتماد (provider_review_status)&lt;br/&gt;المفضلة والمعرض: علاقات Polymorphic" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacingLeft=12;spacingTop=10;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="80" y="490" width="940" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="t5" value="&lt;b&gt;تحديث المخططات&lt;/b&gt;&lt;hr/&gt;powershell -ExecutionPolicy Bypass -File scripts/build-drawio-diagram.ps1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;align=left;verticalAlign=top;spacingLeft=12;spacingTop=10;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="80" y="600" width="940" height="70" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /storage/
+
+# Sitemap (update with your domain)
+# Sitemap: https://yourdomain.com/sitemap.xml
