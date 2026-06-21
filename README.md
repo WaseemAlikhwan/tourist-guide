@@ -39,7 +39,6 @@ npm run build
 php artisan serve
 ```
 
-Visit **http://127.0.0.1:8000**
 
 ### Default admin (development only)
 
